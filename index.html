@@ -186,6 +186,18 @@
             color: #555;
             margin-bottom: 20px;
         }
+        
+        /* --- NEW STYLE FOR THE PLAYER IMAGE --- */
+        .featured-player-image {
+            max-width: 150px;
+            width: 100%;
+            height: auto;
+            border-radius: 50%; /* Makes the image a circle */
+            border: 5px solid #FFFFFF;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
         .back-link {
             display: inline-block;
             margin-top: 20px;
@@ -312,12 +324,10 @@
 <body>
     <div class="container">
         <header class="top-banner">
-            <a href="homepage-layout.html"> <!-- Link to itself for now -->
-                <img src="https://placehold.co/250x80/0A1128/FFFFFF?text=TRC+BUZZ" alt="Sports Company Logo" class="banner-logo">
+            <a href="homepage-layout.html"> <img src="images/Gemini_Generated_Image_oaqew6oaqew6oaqe.png" alt="Sports Company Logo" class="banner-logo">
             </a>
             <div class="sports-ticker" id="sportsTicker">
-                <!-- Content will be dynamically updated by JavaScript -->
-            </div>
+                </div>
             <nav>
                 <ul class="nav-links">
                     <li><a href="#">NHL</a></li>
@@ -327,8 +337,7 @@
                         <a href="#" class="selected">TRC</a>
                         <ul class="dropdown-menu">
                             <li><a href="sports-news-website-layout.html" class="selected-series">On The Rise</a></li>
-                            <!-- Add other TRC series here if needed -->
-                        </ul>
+                            </ul>
                     </li>
                 </ul>
             </nav>
@@ -338,6 +347,9 @@
             <div class="construction-message">
                 <h1>Website Under Construction!</h1>
                 <p>We're brewing something spectacular. Check back soon for the full experience!</p>
+                
+                <img src="images/playerimage.png" alt="Featured Player Amuk Adewale" class="featured-player-image">
+
                 <p>In the meantime, feel free to read our latest feature:</p>
                 <a href="sports-news-website-layout.html" class="back-link">Read the Amuk Adewale Article</a>
             </div>
