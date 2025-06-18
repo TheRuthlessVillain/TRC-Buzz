@@ -9,6 +9,11 @@
     <!-- <link rel="icon" href="images/favicon.ico" type="image/x-icon"> -->
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@700;900&family=Open+Sans:wght@400;600;700&family=Bangers&display=swap" rel="stylesheet">
     <style>
+        /* Universal Box-Sizing for consistent layout */
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+
         /* CSS Variables for Easier Theming */
         :root {
             --primary-blue: #0A1128; /* Dark Navy Blue */
@@ -33,7 +38,7 @@
             align-items: center;
             min-height: 100vh;
             overflow-y: auto;
-            overflow-x: hidden;
+            overflow-x: hidden; /* Important to prevent horizontal scroll from overflow */
             font-weight: 600;
 
             /* --- ENHANCED BACKGROUND FOR POP! --- */
@@ -61,7 +66,7 @@
 
         /* Top Header Banner for Website Layout */
         .top-banner {
-            width: 100%;
+            width: 100%; /* With box-sizing: border-box, this should now fit perfectly */
             background-color: rgba(10, 17, 40, 0.98); /* Near-solid dark blue, higher opacity */
             padding: 5px 30px; /* Slightly more vertical padding */
             display: flex;
@@ -424,7 +429,8 @@
     <div class="container">
         <header class="top-banner">
             <a href="homepage-layout.html">
-                <img src="images/Gemini_Generated_Image_oaqew6oaqew6oaqe.png" alt="TRC Sports News Logo" class="banner-logo">
+                <!-- Updated logo src to use the direct Imgur image URL -->
+                <img src="https://i.imgur.com/qgV8tKF.jpg" alt="TRC Sports News Logo" class="banner-logo">
             </a>
             <div class="sports-ticker" id="sportsTicker">
                 <!-- Ticker content will be dynamically added here by JS -->
@@ -447,7 +453,8 @@
             <div class="construction-message">
                 <h1>Website Under Construction!</h1>
                 <p>We're brewing something spectacular. Get ready for an unparalleled sports news experience.</p>
-                <img src="images/playerimage.png" alt="Featured Player Amuk Adewale" class="featured-player-image">
+                <!-- Player image src set directly to a placeholder -->
+                <img src="https://placehold.co/180x180/0A1128/FFFFFF?text=Player+Image" alt="Featured Player Amuk Adewale" class="featured-player-image">
                 <p>In the meantime, buzz over to our latest exclusive feature:</p>
                 <a href="sports-news-website-layout.html" class="back-link">Read the Amuk Adewale Article</a>
             </div>
@@ -469,12 +476,14 @@
         ];
 
         function createTickerContent() {
+            // Clear existing content to prevent duplication on resize/re-initialization
+            tickerContainer.innerHTML = '';
+
             const contentDiv = document.createElement('div');
             contentDiv.className = 'ticker-content';
             tickerContainer.appendChild(contentDiv);
 
             // Duplicate content to ensure seamless loop
-            const totalScores = tickerScores.length;
             const duplicatedScores = [...tickerScores, ...tickerScores, ...tickerScores]; // Duplicate enough for seamless scroll
 
             duplicatedScores.forEach((scoreText, index) => {
@@ -484,7 +493,7 @@
                 contentDiv.appendChild(scoreSpan);
 
                 // Add separator, but not after the very last item of the original set
-                if (index < duplicatedScores.length - 1) {
+                if (index < duplicatedScores.length - 1) { // Check to ensure no trailing separator
                     const separatorSpan = document.createElement('span');
                     separatorSpan.className = 'ticker-separator';
                     separatorSpan.textContent = ' | ';
@@ -495,22 +504,18 @@
             // Adjust animation duration based on content width for consistent speed
             // This needs to be done after content is rendered
             const contentWidth = contentDiv.scrollWidth;
-            const containerWidth = tickerContainer.clientWidth;
-            const animationDuration = contentWidth / 50; // Adjust '50' for desired scroll speed (pixels per second)
+            // A higher divisor means faster scroll. Adjust '50' for desired speed (pixels per second)
+            const animationDuration = contentWidth / 50;
             contentDiv.style.animationDuration = `${animationDuration}s`;
         }
 
-        // Initialize ticker
-        window.addEventListener('load', createTickerContent); // Ensure DOM is loaded
+        // Initialize ticker when the window has fully loaded all content
+        window.addEventListener('load', createTickerContent);
 
-        // Re-calculate animation duration on resize
+        // Recalculate animation duration and re-create content on window resize
+        // This ensures the ticker speed remains consistent if the layout changes
         window.addEventListener('resize', () => {
-            const contentDiv = tickerContainer.querySelector('.ticker-content');
-            if (contentDiv) {
-                const contentWidth = contentDiv.scrollWidth;
-                const animationDuration = contentWidth / 50;
-                contentDiv.style.animationDuration = `${animationDuration}s`;
-            }
+            createTickerContent(); // Re-create content and re-calculate duration
         });
 
     </script>
